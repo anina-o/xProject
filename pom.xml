@@ -291,6 +291,7 @@
         <module>xCommon</module>
         <module>xService</module>
         <module>xPortal</module>
+        <module>xOperator</module>
     </modules>
 
     <build>
