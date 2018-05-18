@@ -1,12 +1,16 @@
 package fanlun.online.college.business.impl;
 
 import fanlun.online.college.business.IPortalBusiness;
+import fanlun.online.college.core.consts.CourseEnum;
 import fanlun.online.college.core.consts.domain.ConstsClassify;
 import fanlun.online.college.core.consts.service.IConstsClassifyService;
 import fanlun.online.college.core.course.domain.Course;
 import fanlun.online.college.core.course.domain.CourseQueryDto;
+import fanlun.online.college.core.course.domain.CourseSection;
+import fanlun.online.college.core.course.service.ICourseSectionService;
 import fanlun.online.college.core.course.service.ICourseService;
 import fanlun.online.college.vo.ConstsClassifyVO;
+import fanlun.online.college.vo.CourseSectionVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,9 @@ public class PortalBusinessImpl implements IPortalBusiness {
 
     @Autowired
     private ICourseService courseService;
+
+    @Autowired
+    private ICourseSectionService courseSectionService;
 
     /**
      * 获取所有，包括一级分类&二级分类
@@ -61,6 +68,35 @@ public class PortalBusinessImpl implements IPortalBusiness {
             }
         }
         return resultMap;
+    }
+
+
+    /**
+     * 获取课程章节
+     */
+    @Override
+    public List<CourseSectionVO> queryCourseSection(Long courseId) {
+        List<CourseSectionVO> resultList = new ArrayList<CourseSectionVO>();
+        CourseSection queryEntity = new CourseSection();
+        queryEntity.setCourseId(courseId);
+        queryEntity.setOnsale(CourseEnum.ONSALE.value());//上架
+
+        Map<Long,CourseSectionVO> tmpMap = new LinkedHashMap<Long,CourseSectionVO>();
+        Iterator<CourseSection> it = courseSectionService.queryAll(queryEntity).iterator();
+        while(it.hasNext()){
+            CourseSection item = it.next();
+            if(Long.valueOf(0).equals(item.getParentId())){//章
+                CourseSectionVO vo = new CourseSectionVO();
+                BeanUtils.copyProperties(item, vo);
+                tmpMap.put(vo.getId(), vo);
+            }else{
+                tmpMap.get(item.getParentId()).getSections().add(item);//小节添加到大章中
+            }
+        }
+        for(CourseSectionVO vo : tmpMap.values()){
+            resultList.add(vo);
+        }
+        return resultList;
     }
 
     /**
