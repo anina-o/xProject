@@ -63,15 +63,10 @@
                 /error/** = anon
                 /res/** = anon
                 /tools/** = anon
-                /index.html* = anon
+
                 /auth/** = anon
                 /auth/logout.html = logout
 
-                /course/list.html* = anon
-                /course/learn/*.html = anon
-                /course/video/*.html = authc
-
-                /courseComment/segment.html* = anon
 
                 /** = authc
             </value>

@@ -137,7 +137,7 @@
 				//$('#myModal').modal('show');
 				Modal.show('myModal');
 				$('#code').removeAttr('disabled');
-			}else{
+			}else{              //修改
 				$('#code').attr('disabled','disabled');
 				$.ajax({
 					url:'${s.base}/college/getById.html',

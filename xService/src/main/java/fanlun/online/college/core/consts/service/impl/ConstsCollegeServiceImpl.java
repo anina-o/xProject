@@ -9,9 +9,6 @@ import fanlun.online.college.page.TailPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
-
 @Service
 public class ConstsCollegeServiceImpl implements IConstsCollegeService {
 

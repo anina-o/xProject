@@ -17,65 +17,67 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/college")
-public class CollegeController{
+public class CollegeController {
 
-	@Autowired
-	private IConstsCollegeService entityService;
-	
-	/**
-	 * 分页
-	 * @param queryEntity
-	 * @param page
-	 * @return
-	 */
-	@RequestMapping(value = "/queryPageList")
-	public  ModelAndView queryPage(ConstsCollege queryEntity , TailPage<ConstsCollege> page){
-		ModelAndView mv = new ModelAndView("cms/college/collegePageList");
-		mv.addObject("curNav", "college");
-		
-		if(StringUtils.isNotEmpty(queryEntity.getName())){
-			queryEntity.setName(queryEntity.getName().trim());
-		}else{
-			queryEntity.setName(null);
-		}
-		
-		page = entityService.queryPage(queryEntity,page);
-		mv.addObject("page",page);
-		mv.addObject("queryEntity",queryEntity);
-		return mv;
-	}
-	
-	@RequestMapping(value = "/getById")
-	@ResponseBody
-	public String getById(Long id){
-		return JsonView.render(entityService.getById(id));
-	}
-	
-	@RequestMapping(value = "/doMerge")
-	@ResponseBody
-	public String doMerge(ConstsCollege entity){
-		if(entity.getId() == null){
-			ConstsCollege tmpEntity = entityService.getByCode(entity.getCode());
-			if(tmpEntity != null){
-				return JsonView.render(1, "此编码已存在");
-			}
-			entityService.createSelectivity(entity);
-		}else{
-			ConstsCollege tmpEntity = entityService.getByCode(entity.getCode());
-			if(tmpEntity != null && !tmpEntity.getId().equals(entity.getId())){
-				return JsonView.render(1, "此编码已存在");
-			}
-			entityService.updateSelectivity(entity);
-		}
-		return new JsonView().toString();
-	}
+    @Autowired
+    private IConstsCollegeService entityService;
 
-	@RequestMapping(value = "/deleteLogic")
-	@ResponseBody
-	public String deleteLogic(ConstsCollege entity){
-		entityService.deleteLogic(entity);
-		return new JsonView().toString();
-	}
-	
+    /**
+     * 分页
+     *
+     * @param queryEntity
+     * @param page
+     * @return
+     */
+    @RequestMapping(value = "/queryPageList")
+    public ModelAndView queryPage(ConstsCollege queryEntity, TailPage<ConstsCollege> page) {
+        ModelAndView mv = new ModelAndView("cms/college/collegePageList");
+        mv.addObject("curNav", "college");
+
+        if (StringUtils.isNotEmpty(queryEntity.getName())) {
+            queryEntity.setName(queryEntity.getName().trim());
+        } else {
+            queryEntity.setName(null);
+        }
+
+        page.setPageSize(2);
+        page = entityService.queryPage(queryEntity, page);
+        mv.addObject("page", page);
+        mv.addObject("queryEntity", queryEntity);
+        return mv;
+    }
+
+    @RequestMapping(value = "/getById")
+    @ResponseBody
+    public String getById(Long id) {
+        return JsonView.render(entityService.getById(id));
+    }
+
+    @RequestMapping(value = "/doMerge")
+    @ResponseBody
+    public String doMerge(ConstsCollege entity) {
+        if (entity.getId() == null) {
+            ConstsCollege tmpEntity = entityService.getByCode(entity.getCode());
+            if (tmpEntity != null) {
+                return JsonView.render(1, "此编码已存在");
+            }
+            entityService.createSelectivity(entity);
+        } else {
+            ConstsCollege tmpEntity = entityService.getByCode(entity.getCode());
+            if (tmpEntity != null && !tmpEntity.getId().equals(entity.getId())) {
+                return JsonView.render(1, "此编码已存在");
+            }
+            entityService.updateSelectivity(entity);
+        }
+        return new JsonView().toString();
+    }
+
+    @RequestMapping(value = "/deleteLogic")
+    @ResponseBody
+    public String deleteLogic(ConstsCollege entity) {
+        entityService.deleteLogic(entity);
+        return new JsonView().toString();
+    }
+
 }
 
