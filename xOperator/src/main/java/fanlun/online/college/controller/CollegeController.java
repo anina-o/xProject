@@ -57,12 +57,14 @@ public class CollegeController {
     @ResponseBody
     public String doMerge(ConstsCollege entity) {
         if (entity.getId() == null) {
+            //添加
             ConstsCollege tmpEntity = entityService.getByCode(entity.getCode());
             if (tmpEntity != null) {
                 return JsonView.render(1, "此编码已存在");
             }
             entityService.createSelectivity(entity);
         } else {
+            //修改
             ConstsCollege tmpEntity = entityService.getByCode(entity.getCode());
             if (tmpEntity != null && !tmpEntity.getId().equals(entity.getId())) {
                 return JsonView.render(1, "此编码已存在");
