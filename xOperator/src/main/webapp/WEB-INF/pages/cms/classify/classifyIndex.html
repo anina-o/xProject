@@ -23,65 +23,65 @@
         
         <div class="container-fluid pt-10" >
 				
-				<div class="panel panel-5" >
-					<a class="block-heading f-14" data-toggle="collapse">一级分类</a>
-					<div class="block-body collapse in">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>名称</th>
-									<th>编码</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<#if classifys??>
-								<#list classifys as item>
-								<tr class="tr-bg-gray" code="${item.code!}">
-									<td>${item.name!}</td>
-									<td>${item.code!}</td>
-									<td>
-										<a class="link-a" href="javascript:void(0)" onclick="toEdit(${item.id})">修改</a>
-										<a class="link-a" href="javascript:void(0)" onclick="doDelete(${item.id})">删除</a>
-									</td>
-								</tr>
-								</#list>
-								</#if>
-							</tbody>
-						</table>
-					</div>
+			<div class="panel panel-5" >
+				<a class="block-heading f-14" data-toggle="collapse">一级分类</a>
+				<div class="block-body collapse in">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>名称</th>
+								<th>编码</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#if classifys??>
+							<#list classifys as item>
+							<tr class="tr-bg-gray" code="${item.code!}">
+								<td>${item.name!}</td>
+								<td>${item.code!}</td>
+								<td>
+									<a class="link-a" href="javascript:void(0)" onclick="toEdit(${item.id})">修改</a>
+									<a class="link-a" href="javascript:void(0)" onclick="doDelete(${item.id})">删除</a>
+								</td>
+							</tr>
+							</#list>
+							</#if>
+						</tbody>
+					</table>
 				</div>
-				
-				<div class="panel panel-5" >
-					<a class="block-heading f-14" data-toggle="collapse">二级分类</a>
-					<div class="block-body collapse in">
-						<table id="subClassifysTable" class="table">
-							<thead>
-								<tr name="th">
-									<th>名称</th>
-									<th>编码</th>
-									<th>一级分类编码</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<#if subClassifys??>
-								<#list subClassifys as item>
-								<tr code="${item.code!}" parentCode="${item.parentCode!}">
-									<td>${item.name!}</td>
-									<td>${item.code!}</td>
-									<td>${item.parentCode!}</td>
-									<td>
-										<a class="link-a" href="javascript:void(0)" onclick="toEdit(${item.id})">修改</a>
-										<a class="link-a" href="javascript:void(0)" onclick="doDelete(${item.id})">删除</a>
-									</td>
-								</tr>
-								</#list>
-								</#if>
-							</tbody>
-						</table>
-					</div>
+			</div>
+
+			<div class="panel panel-5" >
+				<a class="block-heading f-14" data-toggle="collapse">二级分类</a>
+				<div class="block-body collapse in">
+					<table id="subClassifysTable" class="table">
+						<thead>
+							<tr name="th">
+								<th>名称</th>
+								<th>编码</th>
+								<th>一级分类编码</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#if subClassifys??>
+							<#list subClassifys as item>
+							<tr code="${item.code!}" parentCode="${item.parentCode!}">
+								<td>${item.name!}</td>
+								<td>${item.code!}</td>
+								<td>${item.parentCode!}</td>
+								<td>
+									<a class="link-a" href="javascript:void(0)" onclick="toEdit(${item.id})">修改</a>
+									<a class="link-a" href="javascript:void(0)" onclick="doDelete(${item.id})">删除</a>
+								</td>
+							</tr>
+							</#list>
+							</#if>
+						</tbody>
+					</table>
 				</div>
+			</div>
     	</div>
 		
 	</div>
