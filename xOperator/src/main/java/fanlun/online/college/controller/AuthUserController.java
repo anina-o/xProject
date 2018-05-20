@@ -54,8 +54,8 @@ public class AuthUserController {
     @RequestMapping(value = "/doMerge")
     @ResponseBody
     public String doMerge(AuthUser entity) {
-        entity.setUsername(null);//不更新
-        entity.setRealname(null);//不更新
+        entity.setUsername(null);//防止更新登录名
+        entity.setRealname(null);//防止更新姓名，而只通过id更新
         entityService.updateSelectivity(entity);
         return new JsonView(0).toString();
     }

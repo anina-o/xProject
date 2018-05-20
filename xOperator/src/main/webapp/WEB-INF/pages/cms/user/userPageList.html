@@ -113,10 +113,12 @@
 					</div>
 					
 					<div class="modal-body">
+						<!--模态框表单-->
 						<form id="myForm" role="form" id="ff" action="${s.base}/user/doMerge.html">
+                            <!--主要还是通过id更新-->
 							<input type="hidden"  name="id" />
 							<div class="form-group">
-								<label for="name">名称</label> 
+								<label for="realname">名称</label>
 								<input type="text" class="form-control"  readonly="readonly" name="realname" placeholder="请输入名称">
 							</div>
 							<div class="form-group">
