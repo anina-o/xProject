@@ -22,65 +22,65 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/classify")
-public class ClassifyController{
+public class ClassifyController {
 
-	@Autowired
-	private IConstsClassifyService entityService;
-	
-	@Autowired
-	private IPortalBusiness portalBusiness;
-	
+    @Autowired
+    private IConstsClassifyService entityService;
 
-	@RequestMapping(value = "/getById")
-	@ResponseBody
-	public String getById(Long id){
-		return JsonView.render(entityService.getById(id));
-	}
+    @Autowired
+    private IPortalBusiness portalBusiness;
 
-	@RequestMapping(value = "/index")
-	public  ModelAndView classifyIndex(ConstsClassify queryEntity , TailPage<ConstsClassify> page){
-		ModelAndView mv = new ModelAndView("cms/classify/classifyIndex");
-		mv.addObject("curNav", "classify");
-		Map<String,ConstsClassifyVO> classifyMap = portalBusiness.queryAllClassifyMap();
-		
-		//所有一级分类
-		List<ConstsClassifyVO> classifysList = new ArrayList<ConstsClassifyVO>();
-		for(ConstsClassifyVO vo : classifyMap.values()){
-			classifysList.add(vo);
-		}
-		mv.addObject("classifys", classifysList);
-		
-		List<ConstsClassify> subClassifys = new ArrayList<ConstsClassify>();
-		for(ConstsClassifyVO vo : classifyMap.values()){
-			subClassifys.addAll(vo.getSubClassifyList());
-		}
-		mv.addObject("subClassifys", subClassifys);//所有二级分类
-		
-		return mv;
-	}
 
-	@RequestMapping(value = "/doMerge")
-	@ResponseBody
-	public String doMerge(ConstsClassify entity){
-		if(entity.getId() == null){
-			ConstsClassify tmpEntity = entityService.getByCode(entity.getCode());
-			if(tmpEntity != null){
-				return JsonView.render(1, "此编码已存在");
-			}
-			entityService.createSelectivity(entity);
-		}else{
-			entityService.updateSelectivity(entity);
-		}
-		return new JsonView().toString();
-	}
+    @RequestMapping(value = "/getById")
+    @ResponseBody
+    public String getById(Long id) {
+        return JsonView.render(entityService.getById(id));
+    }
 
-	@RequestMapping(value = "/deleteLogic")
-	@ResponseBody
-	public String deleteLogic(ConstsClassify entity){
-		entityService.deleteLogic(entity);
-		return new JsonView().toString();
-	}
-	
-	
+    @RequestMapping(value = "/index")
+    public ModelAndView classifyIndex(ConstsClassify queryEntity, TailPage<ConstsClassify> page) {
+        ModelAndView mv = new ModelAndView("cms/classify/classifyIndex");
+        mv.addObject("curNav", "classify");
+        Map<String, ConstsClassifyVO> classifyMap = portalBusiness.queryAllClassifyMap();
+
+        //所有一级分类
+        List<ConstsClassifyVO> classifysList = new ArrayList<ConstsClassifyVO>();
+        for (ConstsClassifyVO vo : classifyMap.values()) {
+            classifysList.add(vo);
+        }
+        mv.addObject("classifys", classifysList);
+
+        List<ConstsClassify> subClassifys = new ArrayList<ConstsClassify>();
+        for (ConstsClassifyVO vo : classifyMap.values()) {
+            subClassifys.addAll(vo.getSubClassifyList());
+        }
+        mv.addObject("subClassifys", subClassifys);//所有二级分类
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/doMerge")
+    @ResponseBody
+    public String doMerge(ConstsClassify entity) {
+        if (entity.getId() == null) {
+            ConstsClassify tmpEntity = entityService.getByCode(entity.getCode());
+            if (tmpEntity != null) {
+                return JsonView.render(1, "此编码已存在");
+            }
+            entityService.createSelectivity(entity);
+        } else {
+            entityService.updateSelectivity(entity);
+        }
+        return new JsonView().toString();
+    }
+
+    @RequestMapping(value = "/deleteLogic")
+    @ResponseBody
+    public String deleteLogic(ConstsClassify entity) {
+        entityService.deleteLogic(entity);
+        return new JsonView().toString();
+    }
+
+
 }
 
