@@ -37,6 +37,7 @@
 						<tbody>
 							<#if classifys??>
 							<#list classifys as item>
+							<!--  ************这里 tr 有 code 属性是为了在点击时进行二级过滤**********************-->
 							<tr class="tr-bg-gray" code="${item.code!}">
 								<td>${item.name!}</td>
 								<td>${item.code!}</td>
