@@ -44,6 +44,7 @@ public class SiteCarouselController {
         mv.addObject("curNav", "carousel");
 
         if (entity.getId() != null) {
+            //*****修改 ******
             entity = entityService.getById(entity.getId());
             if (null != entity && StringUtils.isNotEmpty(entity.getPicture())) {
                 String pictureUrl = QiniuStorage.getUrl(entity.getPicture(), ThumbModel.THUMB_128);
