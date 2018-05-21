@@ -101,9 +101,11 @@
 					
 					<div class="modal-body">
 						<form role="form" id="myForm" method="post" action="${s.base}/classify/doMerge.html">
+							<!-- ConstsClassify::id-->
 							<input type="hidden" name="id" value=""/>
 							<div class="form-group">
-								<label for="name">一级分类</label> 
+								<label for="name">一级分类</label>
+                                <!--ConstsClassify::parentCode-->
 								<select name="parentCode" class="form-control"  type="select">
 									<option value="0">总分类</option>
 									<#if classifys??>
@@ -114,11 +116,13 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="name">名称</label> 
+								<label for="name">名称</label>
+                                <!--ConstsClassify:: name-->
 								<input type="text" class="form-control" name="name" id="name" placeholder="请输入名称">
 							</div>
 							<div class="form-group">
-								<label for="name">编码</label> 
+								<label for="name">编码</label>
+                                <!--ConstsClassify:: code-->
 								<input type="text" class="form-control" name="code" id="code" placeholder="请输入编码">
 							</div>
 						</form>
