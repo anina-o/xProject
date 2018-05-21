@@ -63,12 +63,14 @@ public class ClassifyController {
     @ResponseBody
     public String doMerge(ConstsClassify entity) {
         if (entity.getId() == null) {
+            // **** 添加 *****
             ConstsClassify tmpEntity = entityService.getByCode(entity.getCode());
             if (tmpEntity != null) {
                 return JsonView.render(1, "此编码已存在");
             }
             entityService.createSelectivity(entity);
         } else {
+            // **** 修改 ****
             entityService.updateSelectivity(entity);
         }
         return new JsonView().toString();
