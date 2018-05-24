@@ -30,7 +30,7 @@
 <script type="text/javascript">
 	function _queryPage(page){
 		if(page != undefined){
-			$('#_id_pageNum').val(page);
+			$('#_id_pageNum').val(page); <!--当前页的标记-->
 		}
 		var query = $('#queryPageForm').attr('queryPage');
 		if(query && Number(query) == 1){

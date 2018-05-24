@@ -35,6 +35,7 @@
 	                	<#if page.sortDirection == 'DESC'><span>▼</span><#else><span>▲</span></#if>
 	                	</#if>
                 	</a>
+					<!--****排序方向 隐藏域 ****-->
                 	<input type="hidden" id="sortField" name="sortField" value="${page.sortField!}" />
                 	<input type="hidden" id="sortDirection" name="sortDirection" value="${page.sortDirection!'DESC'}" />
                 	<input type="text" class="search-text" name="name" value="${(queryEntity.name)!}"  style="margin-top:5px;" placeholder="请输入课程名称">
