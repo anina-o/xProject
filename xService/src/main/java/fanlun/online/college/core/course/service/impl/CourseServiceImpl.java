@@ -27,6 +27,7 @@ public class CourseServiceImpl implements ICourseService {
         }
     }
 
+    //根据id获取
     @Override
     public Course getById(Long id) {
         Course course = entityDao.getById(id);
